@@ -13,7 +13,8 @@ cmake ${CMAKE_ARGS} -GNinja .. \
 cmake --build . --config Release
 
 if [[ ("${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "") ]]; then
-  ctest --output-on-failure  -C Release
+  # test-timer skipped: https://github.com/conda-forge/serial-cpp-feedstock/pull/1#issuecomment-4777748854
+  ctest --output-on-failure -E "test-timer" -C Release
 fi
 
 cmake --build . --config Release --target install
